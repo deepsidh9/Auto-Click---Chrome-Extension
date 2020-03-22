@@ -10,13 +10,14 @@ function getAllSingleSignOnLinks(links){
         if(links[i].text.includes("Single sign-on")){
             signOnLinks.push(links[i].href);
             console.log("Pushing Links as",links[i].href)
+            return signOnLinks;
 
         }
         
       }
-      console.log("Total Links as",signOnLinks)
+    //   console.log("Total Links as",signOnLinks)
 
-      return signOnLinks;
+    //   return signOnLinks;
 }
 
 function clickOnSingleSignOn(signOnLinks) {
