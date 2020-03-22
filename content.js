@@ -38,7 +38,7 @@ function clickOnSubmit() {
 
 function waitForElementToDisplay(selector, time) {
     console.log("Waiting for element")
-    if(document.querySelector(selector)!=null) {
+    if(document.getElementsByClassName(selector)!=null) {
         console.log("Element found")
         var links = document.links;
         console.log("Total Links Length as",links)
@@ -68,7 +68,7 @@ chrome.runtime.onMessage.addListener(
             var singleSignOnLink = getElementbyXpath('/html/body/div[4]/div/div/div/main/div/div/div/div[3]/div/ul/li[1]/p/a')
             var elementExists = document.getElementById("find-me");
 
-            waitForElementToDisplay("#notes", 5000);
+            waitForElementToDisplay("notes", 5000);
             
 
         }
