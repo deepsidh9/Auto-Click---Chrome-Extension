@@ -57,29 +57,39 @@ function waitForElementToDisplay(selector, time) {
                     
         
                 }
-                else{
-                    setTimeout(console.log("waiting again for links"),5000);
-                    for(var i = 0; i < document.links.length; i++) {
-        
-                        if(document.links[i].href.includes("sso")){
-                            signOnLinks.push(document.links[i].href);
-                            console.log("Pushing Links as",document.links[i].href)
-                            
-                
-                        }
-
-
-
                 }
-            }}
+                
+                try{
+                    if (signOnLinks.length>0 ){
 
-
-
-            console.log("signOnLinks array is as",signOnLinks)
+                        console.log("signOnLinks array is as",signOnLinks)
             if (signOnLinks.length>0){
                 clickOnSingleSignOn(signOnLinks);
                 chrome.runtime.sendMessage({ "message": "Clicked on Single Sign On" });
             }
+
+                    }    
+                }
+
+            catch{
+                setTimeout(console.log("waiting for new links to come"),5000);
+                var signOnLinks=[];
+            for(var i = 0; i < links.length; i++) {
+        
+                if(links[i].href.includes("sso")){
+                    signOnLinks.push(links[i].href);
+                    console.log("Pushing Links as",links[i].href)
+                    
+        
+                }
+                }
+                if (signOnLinks.length>0){
+                    clickOnSingleSignOn(signOnLinks);
+                    chrome.runtime.sendMessage({ "message": "Clicked on Single Sign On" });
+                }
+                }
+
+            
 
     }
     else {
