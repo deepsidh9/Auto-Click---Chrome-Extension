@@ -10,10 +10,11 @@ function getAllSingleSignOnLinks(links){
         if(links[i].text.includes("Single sign-on")){
             signOnLinks.push(links[i].href);
             console.log("Pushing Links as",links[i].href)
-            return signOnLinks;
+            
 
         }
-        
+        console.log("Returning link as ",signOnLinks)
+        return signOnLinks;
       }
     //   console.log("Total Links as",signOnLinks)
 
@@ -44,7 +45,21 @@ function waitForElementToDisplay(selector, time) {
         var links = document.links;
         console.log("Total Links Length as",links.length)
 
-            signOnLinks=getAllSingleSignOnLinks(links)
+            // signOnLinks=getAllSingleSignOnLinks(links)
+            
+            
+            var signOnLinks=[];
+            for(var i = 0; i < links.length; i++) {
+        
+                if(links[i].text.includes("Single sign-on")){
+                    signOnLinks.push(links[i].href);
+                    console.log("Pushing Links as",links[i].href)
+                    
+        
+                }}
+
+
+
             console.log("signOnLinks array is as",signOnLinks)
             if (signOnLinks.length>0){
                 clickOnSingleSignOn(signOnLinks);
