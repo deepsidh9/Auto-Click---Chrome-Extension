@@ -111,7 +111,9 @@ chrome.runtime.onMessage.addListener(
             // var elementExists = document.getElementById("find-me");
             console.log("Sleeping for 5 seconds")
 
-            waitForElementToDisplay("notes", 5000);
+            window.setTimeout(function() {
+                waitForElementToDisplay("notes", 5000);
+              }, 5000);
             
 
         }
