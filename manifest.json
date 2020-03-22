@@ -1,0 +1,31 @@
+{
+    "manifest_version": 2,
+    "name": "Auto Sign in Github Single Sign On(s)",
+    "permissions": [
+        "webNavigation",
+        "tabs",
+        "<all_urls>"
+    ],
+    "version": "0.1",
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+    "browser_action": {
+        "default_icon": {
+            "19": "icon.png"
+        }
+    }
+}
