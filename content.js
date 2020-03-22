@@ -9,15 +9,19 @@ function getAllSingleSignOnLinks(links){
 
         if(links[i].text.includes("Single sign-on")){
             signOnLinks.push(links[i].href);
+            console.log("Pushing Links as",links[i].href)
+
         }
         
       }
+      console.log("Total Links as",signOnLinks)
+
       return signOnLinks;
 }
 
 function clickOnSingleSignOn(signOnLinks) {
     
-    console.log("Content.js logging : Message Received")
+    console.log("setting href as ",signOnLinks[0])
     window.location.href=signOnLinks[0]
 
 
@@ -33,8 +37,12 @@ function clickOnSubmit() {
 
 
 function waitForElementToDisplay(selector, time) {
+    console.log("Waiting for element")
     if(document.querySelector(selector)!=null) {
+        console.log("Element found")
         var links = document.links;
+        console.log("Total Links Length as",links)
+
             signOnLinks=getAllSingleSignOnLinks(links)
             if (signOnLinks.length>0){
                 clickOnSingleSignOn(signOnLinks);
@@ -54,17 +62,19 @@ chrome.runtime.onMessage.addListener(
 
     function (request, sender, sendResponse) {
 
-        console.log("Content.js logging : Message Received")
+        console.log("Content.js logging : Message Received",request.message)
 
         if (request.message === "clicked_browser_action" || request.message === "click_on_single_sign_on") {
             var singleSignOnLink = getElementbyXpath('/html/body/div[4]/div/div/div/main/div/div/div/div[3]/div/ul/li[1]/p/a')
+            var elementExists = document.getElementById("find-me");
+
             waitForElementToDisplay("#notes", 5000);
             
 
         }
 
         else if (request.message === "click_on_submit") {
-
+            console.log("Clicking on submit")    
             clickOnSubmit()
             chrome.runtime.sendMessage({ "message": "Clicked on Submit" });
 
