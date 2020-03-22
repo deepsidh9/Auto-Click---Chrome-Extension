@@ -83,9 +83,10 @@ chrome.runtime.onMessage.addListener(
 
         if (request.message === "clicked_browser_action" || request.message === "click_on_single_sign_on") {
             var singleSignOnLink = getElementbyXpath('/html/body/div[4]/div/div/div/main/div/div/div/div[3]/div/ul/li[1]/p/a')
-            var elementExists = document.getElementById("find-me");
+            // var elementExists = document.getElementById("find-me");
+            console.log("Sleeping for 5 seconds")
 
-            waitForElementToDisplay("notes", 5000);
+            setTimeout( waitForElementToDisplay("notes", 5000),5000);
             
 
         }
