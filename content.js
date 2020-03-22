@@ -42,9 +42,10 @@ function waitForElementToDisplay(selector, time) {
     if(document.getElementsByClassName(selector)!=null) {
         console.log("Element found")
         var links = document.links;
-        console.log("Total Links Length as",links)
+        console.log("Total Links Length as",links.length)
 
             signOnLinks=getAllSingleSignOnLinks(links)
+            console.log("signOnLinks array is as",signOnLinks)
             if (signOnLinks.length>0){
                 clickOnSingleSignOn(signOnLinks);
                 chrome.runtime.sendMessage({ "message": "Clicked on Single Sign On" });
