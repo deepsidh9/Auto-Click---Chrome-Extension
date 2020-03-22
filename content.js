@@ -51,12 +51,27 @@ function waitForElementToDisplay(selector, time) {
             var signOnLinks=[];
             for(var i = 0; i < links.length; i++) {
         
-                if(links[i].text.includes("Single sign-on")){
+                if(links[i].href.includes("sso")){
                     signOnLinks.push(links[i].href);
                     console.log("Pushing Links as",links[i].href)
                     
         
-                }}
+                }
+                else{
+                    setTimeout(console.log("waiting again for links"),5000);
+                    for(var i = 0; i < document.links.length; i++) {
+        
+                        if(document.links[i].href.includes("sso")){
+                            signOnLinks.push(document.links[i].href);
+                            console.log("Pushing Links as",document.links[i].href)
+                            
+                
+                        }
+
+
+
+                }
+            }}
 
 
 
@@ -86,7 +101,7 @@ chrome.runtime.onMessage.addListener(
             // var elementExists = document.getElementById("find-me");
             console.log("Sleeping for 5 seconds")
 
-            setTimeout( waitForElementToDisplay("notes", 5000),5000);
+            waitForElementToDisplay("notes", 5000);
             
 
         }
