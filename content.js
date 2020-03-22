@@ -31,6 +31,25 @@ function clickOnSubmit() {
     submitButton.click();
 }
 
+
+function waitForElementToDisplay(selector, time) {
+    if(document.querySelector(selector)!=null) {
+        var links = document.links;
+            signOnLinks=getAllSingleSignOnLinks(links)
+            if (signOnLinks.length>0){
+                clickOnSingleSignOn(signOnLinks);
+                chrome.runtime.sendMessage({ "message": "Clicked on Single Sign On" });
+            }
+
+    }
+    else {
+        setTimeout(function() {
+            waitForElementToDisplay(selector, time);
+        }, time);
+    }
+}
+
+
 chrome.runtime.onMessage.addListener(
 
     function (request, sender, sendResponse) {
@@ -38,13 +57,8 @@ chrome.runtime.onMessage.addListener(
         console.log("Content.js logging : Message Received")
 
         if (request.message === "clicked_browser_action" || request.message === "click_on_single_sign_on") {
-
-            var links = document.links;
-            signOnLinks=getAllSingleSignOnLinks(links)
-            if (signOnLinks.length>0){
-                clickOnSingleSignOn(signOnLinks);
-                chrome.runtime.sendMessage({ "message": "Clicked on Single Sign On" });
-            }
+            var singleSignOnLink = getElementbyXpath('/html/body/div[4]/div/div/div/main/div/div/div/div[3]/div/ul/li[1]/p/a')
+            waitForElementToDisplay(singleSignOnLink, 5000);
             
 
         }
