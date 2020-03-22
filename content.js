@@ -74,11 +74,11 @@ function waitForElementToDisplay(selector, time) {
             catch{
                 setTimeout(console.log("waiting for new links to come"),5000);
                 var signOnLinks=[];
-            for(var i = 0; i < links.length; i++) {
+            for(var i = 0; i < document.links.length; i++) {
         
                 if(links[i].href.includes("sso")){
-                    signOnLinks.push(links[i].href);
-                    console.log("Pushing Links as",links[i].href)
+                    signOnLinks.push(document.links[i].href);
+                    console.log("Pushing Links as",document.links[i].href)
                     
         
                 }
