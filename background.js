@@ -60,7 +60,7 @@ chrome.webNavigation.onCompleted.addListener(function() {
         console.log(tabs[0].url);
         var activeTab = tabs[0];
 
-        if (activeTab.url.includes("return_to") && activeTab.url.includes("nutanix.okta.com/app/githubcloud/")) {
+        if (activeTab.url.includes("return_to") && activeTab.url.includes("github.com/orgs")) {
 
             console.log("Background.js logging : sending message to content.js")
             chrome.tabs.sendMessage(activeTab.id, { "message": "click_on_submit" });
