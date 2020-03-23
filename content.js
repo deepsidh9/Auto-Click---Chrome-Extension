@@ -16,8 +16,9 @@ function getAllSingleSignOnLinks(links) {
 
 function clickOnSingleSignOn(signOnLinks) {
 
-    console.log("Setting window location href as ", signOnLinks[0])
+    console.log("Requesting window location to be changed as ", signOnLinks[0])
     window.location.href = signOnLinks[0]
+    chrome.runtime.sendMessage({ "message": "change_tab_url","url": signOnLinks[0]});
 }
 
 function clickOnSubmit() {

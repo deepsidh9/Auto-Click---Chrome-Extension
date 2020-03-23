@@ -14,6 +14,10 @@ chrome.browserAction.onClicked.addListener(function (tab) {
             console.log('do_operations is set to ' + "true");
         });
 
+        chrome.storage.local.set({ "target_tab": tabs[0] }, function () {
+            console.log('Target tab  details are set to ' + tab[0]);
+        });
+
         var activeTab = tabs[0];
         console.log("Active tab as", activeTab)
         chrome.tabs.sendMessage(activeTab.id, { "message": "clicked_browser_action", "do_operations": "true" });
@@ -35,15 +39,37 @@ chrome.runtime.onMessage.addListener(
                 console.log('do_operations is set to ' + request.do_operations);
             });
         }
+
+        else if (request.message === "change_tab_url") {
+
+            chrome.storage.local.set({ "target_url": request.url }, function () {
+
+                console.log('Target Url is set to ' + request.url);
+
+                chrome.storage.local.get(null, function (result) {
+
+                    console.log(' Tab url change requested with new url as' + result.target_url);
+                    chrome.tabs.update(result.target_tab.id, { url: result.target_url });
+    
+                });
+
+            });
+
+        }
     }
 );
 
 chrome.webNavigation.onCompleted.addListener(function () {
 
-    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+    // chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+        chrome.storage.local.get(['target_tab'], function (result) {
 
-        console.log("On this tab :", tabs[0].url);
-        var activeTab = tabs[0];
+        targetTab=result.target_tab
+        
+        chrome.tabs.get(targetTab.id, function (targetTab) {
+
+        console.log("On this tab :", targetTab);
+        var activeTab = targetTab;
 
         chrome.storage.local.get(['do_operations'], function (result) {
             console.log(' Web navigation completed ; Value of do_operations currently is ' + result.do_operations);
@@ -66,4 +92,5 @@ chrome.webNavigation.onCompleted.addListener(function () {
             console.log("Doing Nothing")
         }
     });
+});
 });
