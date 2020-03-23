@@ -73,7 +73,6 @@ chrome.webNavigation.onCompleted.addListener(function () {
 
         chrome.storage.local.get(['do_operations'], function (result) {
             console.log(' Web navigation completed ; Value of do_operations currently is ' + result.do_operations);
-        });
 
         if (activeTab.url.includes("return_to") && activeTab.url.includes("github.com/orgs") && result.do_operations === "true") {
             console.log("On submit page")
@@ -91,6 +90,7 @@ chrome.webNavigation.onCompleted.addListener(function () {
         else {
             console.log("Doing Nothing")
         }
+    });
     });
 });
 });
