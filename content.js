@@ -13,6 +13,7 @@ function getAllSingleSignOnLinks(links) {
             return signOnLinks
         }
     }
+}
 
 function clickOnSingleSignOn(signOnLinks) {
 
