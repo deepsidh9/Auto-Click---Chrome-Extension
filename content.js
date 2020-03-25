@@ -93,5 +93,3 @@ chrome.runtime.onMessage.addListener(
         }
     }
 );
-
-// Xpath for  singleSignOnLink = getElementbyXpath('/html/body/div[4]/div/div/div/main/div/div/div/div[3]/div/ul/li[1]/p/a')
